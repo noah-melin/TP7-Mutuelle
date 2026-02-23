@@ -1,0 +1,4 @@
+# Ignorer les fichiers spécifiques à VS Code
+.vscode/
+# Ignorer les environnements virtuels Python
+.venv/

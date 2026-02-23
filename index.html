@@ -65,11 +65,11 @@
                 Résultat de l'Inscription
             </div>
             <div class="result-content">
-                <p>Merci, <strong id="displayNom"></strong>.</p>
-                <p>Votre âge : <strong id="displayAge"></strong> ans</p>
-                <p>Montant estimé des mensualités : <strong id="displayCout"></strong> €</p>
+                <p>Merci, <span id="displayNom"></span>.</p>
+                <p>Votre âge : <span id="displayAge"></span> ans</p>
+                <p>Montant estimé des mensualités : <span id="displayCout"></span> €</p>
                 <p class="disclaimer">Cette estimation s'appuie sur le questionnaire précédent, en attendant la vérification de votre dossier complet.</p>
-                <button class="return-btn" onclick="window.location.reload()">Retour au formulaire</button>
+                <button class="return-btn" onclick="document.getElementById('resultat').style.display = 'none'">Retour au formulaire</button>
             </div>
         </div>
     </div>

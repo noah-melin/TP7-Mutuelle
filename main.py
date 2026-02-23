@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
+# Configuration CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -12,25 +13,30 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Servir les fichiers statiques
 app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
 @app.post("/calculer")
 async def calculer_mensualites(request: Request):
-    data = await request.json()
-    nom = data.get("nom")
-    prenom = data.get("prenom")
-    age = int(data.get("age"))
-    reponses = data.get("reponses", [])
+    try:
+        data = await request.json()
+        nom = data.get("nom")
+        prenom = data.get("prenom")
+        age_utilisateur = int(data.get("age"))
+        reponses_questionnaire = data.get("reponses", [])
 
-    cout_base = 50
-    cout_questions = reponses.count("Oui") * 10
-    surcharge_age = 0
-    if age > 65:
-        surcharge_age = 0.02 * (age - 65) * cout_base
-    cout_total = round(cout_base + cout_questions + surcharge_age, 2)
+        # Calcul des mensualités
+        cout_base = 50
+        cout_questions = reponses_questionnaire.count("Oui") * 10
+        surcharge_age = 0
+        if age_utilisateur > 65:
+            surcharge_age = 0.02 * (age_utilisateur - 65) * cout_base
+        cout_total = round(cout_base + cout_questions + surcharge_age, 2)
 
-    return {"nom_complet": f"{prenom} {nom}", "age": age, "cout_total": cout_total}
+        return {"nom_complet": f"{prenom} {nom}", "age": age_utilisateur, "cout_total": cout_total}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8173)
+    uvicorn.run(app, host="0.0.0.0", port=8182) 
