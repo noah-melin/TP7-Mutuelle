@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription Mutuelle Yapadaj</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulaire d'Inscription à la mutuelle Yapadaj</h1>
+        <img src="https://via.placeholder.com/600x200/4CAF50/FFFFFF?text=Illustration+Mutuelle" alt="Illustration mutuelle" class="banner">
+
+        <form id="inscriptionForm">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Âge :</label>
+                <input type="number" id="age" required>
+            </div>
+
+            <h3>Questionnaire de Santé</h3>
+            <div class="question-group">
+                <label>
+                    <input type="checkbox" name="question" value="Antécédents familiaux de maladies graves">
+                    Avez-vous des antécédents familiaux de maladies graves ?
+                </label>
+            </div>
+
+            <div class="question-group">
+                <label>
+                    <input type="checkbox" name="question" value="Sport à risque">
+                    Pratiquez-vous un sport à risque ?
+                </label>
+            </div>
+
+            <button type="submit" class="submit-btn">Envoyer</button>
+        </form>
+
+        <div id="resultat" class="result-container" style="display: none;">
+            <div class="result-header">
+                Résultat de l'Inscription
+            </div>
+            <div class="result-content">
+                <p>Merci, <strong id="displayNom"></strong>.</p>
+                <p>Votre âge : <strong id="displayAge"></strong> ans</p>
+                <p>Montant estimé des mensualités : <strong id="displayCout"></strong> €</p>
+                <p class="disclaimer">Cette estimation s'appuie sur le questionnaire précédent, en attendant la vérification de votre dossier complet.</p>
+                <button class="return-btn" onclick="window.location.reload()">Retour au formulaire</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
