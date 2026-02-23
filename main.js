@@ -5,7 +5,6 @@ document.getElementById("inscriptionForm").addEventListener("submit", async (e) 
     const prenom = document.getElementById("prenom").value;
     const age = document.getElementById("age").value;
 
-    // Récupérer les réponses aux questions
     const reponses = [];
     for (let i = 1; i <= 5; i++) {
         const ouiChecked = document.querySelector(`input[name="q${i}"][value="Oui"]:checked`);
@@ -22,8 +21,8 @@ document.getElementById("inscriptionForm").addEventListener("submit", async (e) 
 
     const data = await response.json();
 
-    // Afficher le résultat
-    document.getElementById("displayNom").textContent = data.nom;
+    // Affichage des résultats
+    document.getElementById("displayNom").textContent = data.nom_complet;
     document.getElementById("displayAge").textContent = data.age;
     document.getElementById("displayCout").textContent = data.cout_total;
 

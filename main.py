@@ -4,7 +4,6 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-# Configuration CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,10 +12,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Servir les fichiers statiques
 app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
-# Route pour calculer les mensualités
 @app.post("/calculer")
 async def calculer_mensualites(request: Request):
     data = await request.json()
@@ -25,7 +22,6 @@ async def calculer_mensualites(request: Request):
     age = int(data.get("age"))
     reponses = data.get("reponses", [])
 
-    # Logique de calcul
     cout_base = 50
     cout_questions = reponses.count("Oui") * 10
     surcharge_age = 0
@@ -33,9 +29,8 @@ async def calculer_mensualites(request: Request):
         surcharge_age = 0.02 * (age - 65) * cout_base
     cout_total = round(cout_base + cout_questions + surcharge_age, 2)
 
-    return {"nom": f"{prenom} {nom}", "age": age, "cout_total": cout_total}
+    return {"nom_complet": f"{prenom} {nom}", "age": age, "cout_total": cout_total}
 
-# Lancement du serveur
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8173)  # Remplacez 8173 par votre port
+    uvicorn.run(app, host="0.0.0.0", port=8173)
