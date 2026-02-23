@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
-# Configuration CORS pour éviter les erreurs de cross-origin
+# Configuration CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Servir les fichiers statiques (HTML, CSS, JS)
+# Servir les fichiers statiques
 app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
 # Route pour calculer les mensualités
@@ -21,10 +21,11 @@ app.mount("/", StaticFiles(directory=".", html=True), name="static")
 async def calculer_mensualites(request: Request):
     data = await request.json()
     nom = data.get("nom")
+    prenom = data.get("prenom")
     age = int(data.get("age"))
     reponses = data.get("reponses", [])
 
-    # Logique de calcul des mensualités
+    # Logique de calcul
     cout_base = 50
     cout_questions = reponses.count("Oui") * 10
     surcharge_age = 0
@@ -32,9 +33,9 @@ async def calculer_mensualites(request: Request):
         surcharge_age = 0.02 * (age - 65) * cout_base
     cout_total = round(cout_base + cout_questions + surcharge_age, 2)
 
-    return {"nom": nom, "age": age, "cout_total": cout_total}
+    return {"nom": f"{prenom} {nom}", "age": age, "cout_total": cout_total}
 
 # Lancement du serveur
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8173)  # Remplacez 8173 par votre port (ex: 8017 pour user17)
+    uvicorn.run(app, host="0.0.0.0", port=8173)  # Remplacez 8173 par votre port

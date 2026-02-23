@@ -2,15 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription Mutuelle Yapadaj</title>
+    <title>Formulaire d'inscription à la mutuelle Yapadaj</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Formulaire d'Inscription à la mutuelle Yapadaj</h1>
-        <img src="https://via.placeholder.com/600x200/4CAF50/FFFFFF?text=Illustration+Mutuelle" alt="Illustration mutuelle" class="banner">
+        <h1 class="title">Formulaire d'inscription à la mutuelle Yapadaj</h1>
 
-        <form id="inscriptionForm">
+        <form id="inscriptionForm" class="form">
             <div class="form-group">
                 <label for="nom">Nom :</label>
                 <input type="text" id="nom" required>
@@ -26,19 +25,36 @@
                 <input type="number" id="age" required>
             </div>
 
-            <h3>Questionnaire de Santé</h3>
+            <h3>Questionnaire de Santé :</h3>
+
             <div class="question-group">
-                <label>
-                    <input type="checkbox" name="question" value="Antécédents familiaux de maladies graves">
-                    Avez-vous des antécédents familiaux de maladies graves ?
-                </label>
+                <p>1. Avez-vous des antécédents familiaux de maladies graves ?</p>
+                <label><input type="radio" name="q1" value="Oui"> Oui</label>
+                <label><input type="radio" name="q1" value="Non" checked> Non</label>
             </div>
 
             <div class="question-group">
-                <label>
-                    <input type="checkbox" name="question" value="Sport à risque">
-                    Pratiquez-vous un sport à risque ?
-                </label>
+                <p>2. Fumez-vous régulièrement ?</p>
+                <label><input type="radio" name="q2" value="Oui"> Oui</label>
+                <label><input type="radio" name="q2" value="Non" checked> Non</label>
+            </div>
+
+            <div class="question-group">
+                <p>3. Avez-vous une vie sédentaire (moins de 30 min d'activité physique par jour) ?</p>
+                <label><input type="radio" name="q3" value="Oui"> Oui</label>
+                <label><input type="radio" name="q3" value="Non" checked> Non</label>
+            </div>
+
+            <div class="question-group">
+                <p>4. Prenez-vous des médicaments de façon chronique ?</p>
+                <label><input type="radio" name="q4" value="Oui"> Oui</label>
+                <label><input type="radio" name="q4" value="Non" checked> Non</label>
+            </div>
+
+            <div class="question-group">
+                <p>5. Avez-vous subi une hospitalisation dans les deux dernières années ?</p>
+                <label><input type="radio" name="q5" value="Oui"> Oui</label>
+                <label><input type="radio" name="q5" value="Non" checked> Non</label>
             </div>
 
             <button type="submit" class="submit-btn">Envoyer</button>

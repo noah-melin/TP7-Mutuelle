@@ -4,7 +4,15 @@ document.getElementById("inscriptionForm").addEventListener("submit", async (e) 
     const nom = document.getElementById("nom").value;
     const prenom = document.getElementById("prenom").value;
     const age = document.getElementById("age").value;
-    const reponses = Array.from(document.querySelectorAll('input[name="question"]:checked')).map(el => "Oui");
+
+    // Récupérer les réponses aux questions
+    const reponses = [];
+    for (let i = 1; i <= 5; i++) {
+        const ouiChecked = document.querySelector(`input[name="q${i}"][value="Oui"]:checked`);
+        if (ouiChecked) {
+            reponses.push("Oui");
+        }
+    }
 
     const response = await fetch('/calculer', {
         method: 'POST',
@@ -14,9 +22,9 @@ document.getElementById("inscriptionForm").addEventListener("submit", async (e) 
 
     const data = await response.json();
 
-    // Affichage du résultat
-    document.getElementById("displayNom").textContent = `${prenom} ${nom}`;
-    document.getElementById("displayAge").textContent = age;
+    // Afficher le résultat
+    document.getElementById("displayNom").textContent = data.nom;
+    document.getElementById("displayAge").textContent = data.age;
     document.getElementById("displayCout").textContent = data.cout_total;
 
     document.getElementById("resultat").style.display = "block";
